@@ -18,10 +18,12 @@ public class ReadConfigMain {
 		return id_cabina;
 	}
 	
-	public static String getIpDestino() throws IOException {
+	public static ApiServer getIpDestino() throws IOException {
 
 		String ip_destino = properties.getPropValues().getProperty("ip_destino");
-		return ip_destino;
+
+		ApiServer api_server = new ApiServer(ip_destino);
+		return api_server;
 	}
 	
 	public static String getLogMaxSize() throws IOException {

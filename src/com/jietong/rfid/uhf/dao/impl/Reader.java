@@ -361,7 +361,6 @@ public class Reader extends PACKAGE {
 		}
 		SerialPortService serialPortService = new SerialPortServiceImpl();
 		byte[] result = serialPortService.read(serialPort);
-		//pintReceiveData(result);
 		return result;
 	}
 	
@@ -451,6 +450,7 @@ public class Reader extends PACKAGE {
 			}
 			ByteBuffer receiveBuf = ByteBuffer.allocate(50);
 			ByteBuffer receiveLength = ByteBuffer.allocate(1);
+
 			for (int i = 0; i < receiveVal.length; i++) {
 				if (trandPackage(reader, receiveVal[i], receiveBuf,receiveLength)) {
 					if (this.cmd == cmd) {
@@ -700,7 +700,7 @@ public class Reader extends PACKAGE {
 		String direction = "";//dataStorage[4]
 		
         String data = DataConvert.bytesToHexString(readData);
-        //System.out.println("EPC " + data);
+        
 		
 		System.arraycopy(readData, 0, dataStorage, 0, 1);
 		int EPCLength = DataConvert.byteToInt(dataStorage[0]);//temporary storage
@@ -792,7 +792,6 @@ public class Reader extends PACKAGE {
 		if (null == reader) {
 			return;
 		}
-		
 		ByteBuffer receiveBuf = ByteBuffer.allocate(50);
 		ByteBuffer receiveLength = ByteBuffer.allocate(1);
 		Map<String,String> EpcData = null;
@@ -800,10 +799,12 @@ public class Reader extends PACKAGE {
 			if (trandPackageV2(reader, buffer[i], receiveBuf, receiveLength)) {
 				int length = DataConvert.byteToInt(receiveLength.array()[0]);
 				byte[] readData = Arrays.copyOf(receiveBuf.array(), length);
+				// PRINT ACA
 				//2018-11-30新增的 协议
 				switch (cmd) {
 				case (byte) 0xE5:// 寻卡一次
 					if (length > 10) {
+						// RECUPERA EPC
 						EpcData = filterEpcRssiAndAnt(readData);
 						callBack.readData(EpcData.get("EPC"), EpcData.get("RSSI"), EpcData.get("ANT"),EpcData.get("DeviceNo"),EpcData.get("Direction"));
 					}
@@ -919,9 +920,20 @@ public class Reader extends PACKAGE {
 			return;
 		}
 		boolean exit = true;
+		/*byte[] pwd = new byte[4];
+		for (int iv = 0; iv < 4; ++iv) {
+			String str = "00000000".substring(iv * 2, (2 + iv * 2));
+			pwd[iv] = Byte.parseByte(str, 16);
+		}*/
 		do {
 			try {
-				final byte[] buffer = deviceReadBuffer(reader);
+				byte[] buffer = deviceReadBuffer(reader);
+				
+				/*String TID =  readTagData(reader, (byte) 2, (byte) 0, (byte) 6, pwd);
+				if (! TID.equals("800000000000000000000000")) {
+					System.out.print("TID: " + TID);
+				}*/
+
 				if (null != buffer) {
 					deviceTransBufferV2(reader, buffer, callBack);
 				}
@@ -930,7 +942,7 @@ public class Reader extends PACKAGE {
 						exit = threadStart;
 					}
 				}
-				Thread.sleep(20);
+				Thread.sleep(1);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -1343,8 +1355,9 @@ public class Reader extends PACKAGE {
 					byte[] total = Arrays.copyOf(buffer.array(),length);
 					StringBuffer sb = new StringBuffer();
 					for (int i = 0; i < length; i++) {
-						sb.append(DataConvert.bytesToHexString(total[i]));
+						sb.append(DataConvert.bytesToHexString(total[i]));						
 					}
+					//System.out.println("str " + sb.toString());
 					return sb.toString();
 				}
 				return null;

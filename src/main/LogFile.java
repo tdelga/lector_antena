@@ -21,12 +21,11 @@ public class LogFile {
 		// CARGA LECTURA DE UN TAG
 		public static void guardarLectura(String epc,String datetime) throws IOException{
 			
-			String new_log = MessageFormat.format("FECHA: {0} TID: {1} EPC: {1}\n", datetime,epc);
+			String new_log = MessageFormat.format("FECHA: {0} EPC: {1}\n", datetime,epc);
 			
 			log_file = new FileWriter(log_path,true);
 			log_file.write(new_log);
 			log_file.close();
-			
 		}
 		
 		// REDUCE FILE A N BYTES
@@ -35,6 +34,7 @@ public class LogFile {
 			RandomAccessFile file = new RandomAccessFile (log_path,"rw");
 			byte[] data = new byte[log_max_size];
 			int file_length = (int) file.length();
+			System.out.print(file_length);
 			
 			// SUPERA EL TAMANIO MAXIMO PERMITIDO
 			if(file_length > log_max_size) {				

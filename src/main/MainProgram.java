@@ -27,18 +27,23 @@ public class MainProgram{
 	static String id_cabina;
 	static String host;
 	static LogFile log_file;
+	static ApiServer api_server;
+	static String last_epc_processed = "";
 	
 	// MAIN PROGRAM
 	public static void main(String [] args) throws IOException, Throwable{
 		
-
-		// CONFIG FILE
+		//  MAIN CONFIG
 		host = ReadConfigMain.getHost();
 		id_cabina = ReadConfigMain.getIdCabina();
 		
-		//REDUCE LOG
+		// LOG FILE CONFIG
 		log_file = ReadConfigMain.getLogFile();
 		LogFile.verificarTamanio();
+		
+		// SERVER CONFIG
+		api_server = ReadConfigMain.getIpDestino();
+		ApiServer.setIdCabina(id_cabina);
 		
 		// SERVICIO LECTOR EN ATENA
 		ReaderService readerService = new ReaderServiceImpl();
@@ -47,7 +52,6 @@ public class MainProgram{
 		//CONEXION SERVICIO
 		reader = readerService.connect(host, 0);
 		readerService.beginInvV2(reader, new CallBackData());
-		//readerService.stopInvV2(reader, null);
 
 	    //readerService.disconnect(reader);
 	}
@@ -57,18 +61,27 @@ public class MainProgram{
 		
 		@Override
 		public void readData(String data, String rssi, String antNo,String deviceNo, String direction) {
-			
-			System.out.println("EPC " + data + " Cabina " + id_cabina );
-			
-			// TIME
-			String right_now_time = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(new Date());
 
-			//GUARDA EN LOG
-			try {
-				LogFile.guardarLectura(data, right_now_time);
-			} catch (IOException e) {
-				System.out.println("Error al guardar la lectura en el log local");
-				e.printStackTrace();
+			if( ! last_epc_processed.equals(data)) {
+				
+				//ACTUALIZA ULTIMO PROCESADO
+				last_epc_processed = data;
+				
+				// TIME
+				String right_now_time = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(new Date());
+				
+				// SERVER SEND
+				ApiServer.enviarLectura(data, right_now_time);
+
+				//GUARDA EN LOG
+				try {
+					LogFile.guardarLectura(data, right_now_time);
+				} catch (IOException e) {
+					System.out.println("Error al guardar la lectura en el log local");
+					e.printStackTrace();
+				}
+				
+
 			}
 		}
 	}
