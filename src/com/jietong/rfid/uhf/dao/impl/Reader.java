@@ -699,7 +699,7 @@ public class Reader extends PACKAGE {
 		String deviceNo = "";//dataStorage[2,3]
 		String direction = "";//dataStorage[4]
 		
-        String data = DataConvert.bytesToHexString(readData);
+        //String data = DataConvert.bytesToHexString(readData);
         
 		
 		System.arraycopy(readData, 0, dataStorage, 0, 1);

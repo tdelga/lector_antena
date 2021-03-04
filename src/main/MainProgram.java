@@ -1,21 +1,9 @@
 package main;
 
 import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.text.MessageFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringJoiner;
-import java.io.File;
-import java.io.FileWriter;
+
 
 import com.jietong.rfid.uhf.dao.impl.Reader;
 import com.jietong.rfid.uhf.service.CallBack;
