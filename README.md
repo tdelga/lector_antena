@@ -19,7 +19,7 @@ Configuracion y Ejecucion
  
 2- Crear archivo de servicio /etc/systemd/system/reader.service con siguiente contenido
 
-  Unit]
+  [Unit]
   Description= reader script
 
   [Service]
@@ -29,5 +29,7 @@ Configuracion y Ejecucion
   WantedBy=multi-user.target
   
 4- systemctl enable reader , esto habilita el servicio para el booteo
+
+PARA TESTEO systemctl star reader
   
 
