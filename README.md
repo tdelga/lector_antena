@@ -28,4 +28,6 @@ Configuracion y Ejecucion
   [Install]
   WantedBy=multi-user.target
   
+4- systemctl enable reader , esto habilita el servicio para el booteo
+  
 
