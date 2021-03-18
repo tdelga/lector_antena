@@ -46,7 +46,7 @@ public class ReadConfigMain {
 		// OBJETO LOG FILE
 		String cuenta = properties.getPropValues().getProperty("mail_cuenta");
 		String password = properties.getPropValues().getProperty("mail_password");
-		String destino = properties.getPropValues().getProperty("mail_pdestino");
+		String destino = properties.getPropValues().getProperty("mail_destino");
 		String log_path = properties.getPropValues().getProperty("log_path");
 		String id_cabina = properties.getPropValues().getProperty("id_cabina");
 		Mail mail = new Mail(cuenta,password,destino,log_path,id_cabina);

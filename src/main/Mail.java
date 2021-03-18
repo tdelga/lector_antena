@@ -38,6 +38,7 @@ public class Mail {
 	        prop.put("mail.smtp.auth", "true");
 	        prop.put("mail.smtp.starttls.enable", "true"); //TLS
 	        
+	        
 	        Session session = Session.getInstance(prop,
 	                new javax.mail.Authenticator() {
 	                    protected PasswordAuthentication getPasswordAuthentication() {
@@ -51,7 +52,7 @@ public class Mail {
 
 	         // Set From: header field of the header.
 	         message.setFrom(new InternetAddress(mail_cuenta));
-
+	        
 	         // Set To: header field of the header.
 	         message.addRecipient(Message.RecipientType.TO,new InternetAddress(mail_destino));
 	         
@@ -76,7 +77,7 @@ public class Mail {
 	         messageBodyPart = new MimeBodyPart();
 	         DataSource source = new FileDataSource(log_path);
 	         messageBodyPart.setDataHandler(new DataHandler(source));
-	         messageBodyPart.setFileName(log_path);
+	         messageBodyPart.setFileName(id_Cabina +" - " +right_now_time + ".txt");
 	         multipart.addBodyPart(messageBodyPart);
 
 	         // Send the complete message parts

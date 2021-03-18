@@ -21,9 +21,7 @@ public class MainProgram{
 	
 	// MAIN PROGRAM
 	public static void main(String [] args) throws IOException, Throwable{
-		Mail mail = new Mail("lector.antena.mail@gmail.com","bVb56XSm6c7PSrj","lector.antena.mail@gmail.com","log.txt","miralo");
-		mail.enviarLog();
-		/*System.out.println("Working Directory = " + System.getProperty("user.dir"));
+
 		//  MAIN CONFIG
 		host = ReadConfigMain.getHost();
 		id_cabina = ReadConfigMain.getIdCabina();
@@ -38,8 +36,8 @@ public class MainProgram{
 		
 		// SEND MAIL
 		mail = ReadConfigMain.getMail();
+		mail.enviarLog();
 		
-		/*
 		// SERVICIO LECTOR EN ATENA
 		ReaderService readerService = new ReaderServiceImpl();
 		Reader reader = new Reader();		
