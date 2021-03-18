@@ -15,12 +15,15 @@ public class MainProgram{
 	static String id_cabina;
 	static String host;
 	static LogFile log_file;
+	static Mail mail;
 	static ApiServer api_server;
 	static String last_epc_processed = "";
 	
 	// MAIN PROGRAM
 	public static void main(String [] args) throws IOException, Throwable{
-		
+		Mail mail = new Mail("lector.antena.mail@gmail.com","bVb56XSm6c7PSrj","lector.antena.mail@gmail.com","log.txt","miralo");
+		mail.enviarLog();
+		/*System.out.println("Working Directory = " + System.getProperty("user.dir"));
 		//  MAIN CONFIG
 		host = ReadConfigMain.getHost();
 		id_cabina = ReadConfigMain.getIdCabina();
@@ -33,6 +36,10 @@ public class MainProgram{
 		api_server = ReadConfigMain.getIpDestino();
 		ApiServer.setIdCabina(id_cabina);
 		
+		// SEND MAIL
+		mail = ReadConfigMain.getMail();
+		
+		/*
 		// SERVICIO LECTOR EN ATENA
 		ReaderService readerService = new ReaderServiceImpl();
 		Reader reader = new Reader();		
@@ -41,7 +48,7 @@ public class MainProgram{
 		reader = readerService.connect(host, 0);
 		readerService.beginInvV2(reader, new CallBackData());
 
-	    //readerService.disconnect(reader);
+	    //readerService.disconnect(reader);*/
 	}
 	
 	// CALLBACK ASIGNADO A LECTURA DE ANTENA
