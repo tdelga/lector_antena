@@ -14,7 +14,7 @@ public class GetPropertyValues {
 		Properties prop = null;
 		try {
 			prop = new Properties();
-			String propFileName = "main/config.properties";
+			String propFileName = "config.properties";
  
 			inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
  

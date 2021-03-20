@@ -31,14 +31,14 @@ public class Mail {
 	
 	public void enviarLog() {
 		
-	      
+	      	// CONFIG SMPT
 	        Properties prop = new Properties();
 	        prop.put("mail.smtp.host", "smtp.gmail.com");
 	        prop.put("mail.smtp.port", "587");
 	        prop.put("mail.smtp.auth", "true");
 	        prop.put("mail.smtp.starttls.enable", "true"); //TLS
 	        
-	        
+	        // LOGIN USER
 	        Session session = Session.getInstance(prop,
 	                new javax.mail.Authenticator() {
 	                    protected PasswordAuthentication getPasswordAuthentication() {
@@ -47,43 +47,35 @@ public class Mail {
 	                });    
 
 	      try {
-	         // Create a default MimeMessage object.
+	         // SESION
 	         MimeMessage message = new MimeMessage(session);
 
-	         // Set From: header field of the header.
+	         // DESDE
 	         message.setFrom(new InternetAddress(mail_cuenta));
-	        
-	         // Set To: header field of the header.
+	         // HASTA
 	         message.addRecipient(Message.RecipientType.TO,new InternetAddress(mail_destino));
 	         
-
-	         // Set Subject: header field
-	         String right_now_time = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(new Date());
+	         // TITULO
+	         String right_now_time = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
 	         message.setSubject(id_Cabina +" - " +right_now_time);
-
-	         // Create the message part 
-	         BodyPart messageBodyPart = new MimeBodyPart();
-
-	         // Fill the message
-	         messageBodyPart.setText("Reporte al encender formacion");
 	         
-	         // Create a multipar message
+	         // SETEO FILE TYPE
 	         Multipart multipart = new MimeMultipart();
 
-	         // Set text message part
+	         // BODY MAIL
+	         BodyPart messageBodyPart = new MimeBodyPart();
+	         messageBodyPart.setText("Reporte al encender formacion");
 	         multipart.addBodyPart(messageBodyPart);
 
-	         // Part two is attachment
+	         // ADJUNTA FILE
 	         messageBodyPart = new MimeBodyPart();
 	         DataSource source = new FileDataSource(log_path);
 	         messageBodyPart.setDataHandler(new DataHandler(source));
 	         messageBodyPart.setFileName(id_Cabina +" - " +right_now_time + ".txt");
 	         multipart.addBodyPart(messageBodyPart);
-
-	         // Send the complete message parts
 	         message.setContent(multipart );
 
-	         // Send message
+	         // ENVIO MENSAJE
 	         Transport.send(message);
 	         System.out.println("Sent message successfully....");
 	      } catch (MessagingException mex) {
