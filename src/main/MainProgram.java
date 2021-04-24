@@ -61,7 +61,7 @@ public class MainProgram{
 				last_epc_processed = data;
 				
 				// TIME
-				String right_now_time = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").format(new Date());
+				String right_now_time = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
 				
 				// SERVER SEND
 				ApiServer.enviarLectura(data, right_now_time);

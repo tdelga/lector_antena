@@ -34,10 +34,10 @@ public class LogFile {
 			RandomAccessFile file = new RandomAccessFile (log_path,"rw");
 			byte[] data = new byte[log_max_size];
 			int file_length = (int) file.length();
-			System.out.print(file_length);
-			
+			System.out.print(log_path);
 			// SUPERA EL TAMANIO MAXIMO PERMITIDO
-			if(file_length > log_max_size) {				
+			if(file_length > log_max_size) {		
+
 				// PUNTERO A ULTIMOS N BYTES
 				file.seek(file_length - log_max_size);
 				file.read(data, 0, log_max_size);

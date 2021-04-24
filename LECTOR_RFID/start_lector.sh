@@ -1,3 +1,4 @@
 #!/bin/bash
+
 sleep 30
-sudo java -jar /home/user/LECTOR_RFID/Lector.jar
+java -jar /home/user/LECTOR_RFID/Lector_v1.jar
