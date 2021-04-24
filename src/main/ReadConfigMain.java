@@ -21,8 +21,11 @@ public class ReadConfigMain {
 	public static ApiServer getIpDestino() throws IOException {
 
 		String ip_destino = properties.getPropValues().getProperty("ip_destino");
+		String id_cabina = properties.getPropValues().getProperty("id_cabina");
+		String username = properties.getPropValues().getProperty("username");
+		String password = properties.getPropValues().getProperty("password");
 
-		ApiServer api_server = new ApiServer(ip_destino);
+		ApiServer api_server = new ApiServer(ip_destino,id_cabina,username,password);
 		return api_server;
 	}
 	

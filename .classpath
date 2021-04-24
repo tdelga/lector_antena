@@ -16,5 +16,10 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="C:/Users/juanf/Downloads/SDK Antena/R2000 Java V1.20/JT_R2kS_J1.20_SDK/dll"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/juanf/Downloads/SDK Antena/R2000 Java V1.20/JT_R2kS_J1.20_SDK/dll/activation-1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/juanf/Downloads/SDK Antena/R2000 Java V1.20/JT_R2kS_J1.20_SDK/dll/javax.mail.jar"/>
+	<classpathentry kind="lib" path="C:/Users/juanf/Downloads/SDK Antena/R2000 Java V1.20/JT_R2kS_J1.20_SDK/lib/retrofit-2.9.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/juanf/Downloads/SDK Antena/R2000 Java V1.20/JT_R2kS_J1.20_SDK/lib/gson-2.8.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/juanf/Downloads/SDK Antena/R2000 Java V1.20/JT_R2kS_J1.20_SDK/lib/converter-gson-2.9.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -32,7 +32,7 @@ public class MainProgram{
 		
 		// SERVER CONFIG
 		api_server = ReadConfigMain.getIpDestino();
-		ApiServer.setIdCabina(id_cabina);
+		//ApiServer.login();
 		
 		// SEND MAIL
 		mail = ReadConfigMain.getMail();
