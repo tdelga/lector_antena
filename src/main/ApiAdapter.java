@@ -10,7 +10,7 @@ public class ApiAdapter {
     public static ApiService getApiService() {
 
 
-        String baseUrl = "http://192.168.0.238:5000/";
+        String baseUrl = "http://151.106.109.37:5000//";
 
         if (API_SERVICE == null) {
             Retrofit retrofit = new Retrofit.Builder()

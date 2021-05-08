@@ -22,7 +22,11 @@ public class MainProgram{
 	// MAIN PROGRAM
 	public static void main(String [] args) throws IOException, Throwable{
 
-		//  MAIN CONFIG
+		// SERVER CONFIG
+		api_server = ReadConfigMain.getIpDestino();
+		ApiServer.login();
+		
+		/*/  MAIN CONFIG
 		host = ReadConfigMain.getHost();
 		id_cabina = ReadConfigMain.getIdCabina();
 		
@@ -30,9 +34,6 @@ public class MainProgram{
 		log_file = ReadConfigMain.getLogFile();
 		LogFile.verificarTamanio();
 		
-		// SERVER CONFIG
-		api_server = ReadConfigMain.getIpDestino();
-		//ApiServer.login();
 		
 		// SEND MAIL
 		mail = ReadConfigMain.getMail();
