@@ -36,7 +36,7 @@ public class Reader extends PACKAGE {
 		reader.isSerialPortConnect = false;
 		reader.host = host;
 		if (reader.isSerialPortConnect) {
-			reader.port = 11520;// ZLÉèÖÃÎª230400
+			reader.port = 11520;// ZLï¿½ï¿½ï¿½ï¿½Îª230400
 		} else {
 			reader.port = 20058;
 		}
@@ -59,6 +59,7 @@ public class Reader extends PACKAGE {
 			}
 		}else{
 			try {
+				
 				SocketService networkService = new SocketServiceImpl();
 				reader.socket = networkService.open(reader.host, reader.port);
 				if (null != reader.socket) {
@@ -272,23 +273,23 @@ public class Reader extends PACKAGE {
 		if (getBuffer.limit() < 1) {
 			return false;
 		}
-		if (bank == 0) {// ±£ÁôÇø
+		if (bank == 0) {// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			if (begin + size > 4) {
 				return false;
 			}
-		} else if (bank == 1) { // EPCÇø
+		} else if (bank == 1) { // EPCï¿½ï¿½
 			if (begin + size > 8) {
 				return false;
 			}
-		} else if (bank == 2) { // TIDÇø
+		} else if (bank == 2) { // TIDï¿½ï¿½
 			if (begin + size > 6) {
 				return false;
 			}
-		} else if (bank == 3) { // ÓÃ»§Çø
+		} else if (bank == 3) { // ï¿½Ã»ï¿½ï¿½ï¿½
 			if (begin + size > 32) {
 				return false;
 			}
-		} else { // ÎÞÐ§µÄbankÖµ
+		} else { // ï¿½ï¿½Ð§ï¿½ï¿½bankÖµ
 			return false;
 		}
 		byte sendBuf[] = new byte[256];
@@ -303,7 +304,7 @@ public class Reader extends PACKAGE {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			// ÓÃÀ´½ÓÊÕÊý¾Ý´æ·ÅµÄbuffer
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý´ï¿½Åµï¿½buffer
 			ByteBuffer buffer = ByteBuffer.allocate(20);
 			if (readData(reader, CMD.UHF_READ_TAG_DATA, buffer, size * 2)) {
 				if (reader.data[0] != ERROR.HOST_ERROR) {
@@ -457,7 +458,7 @@ public class Reader extends PACKAGE {
 						int _length = DataConvert.byteToInt(receiveLength.array()[0]);
 						byte[] _readData = Arrays.copyOf(receiveBuf.array(),_length);
 						if (null != buffer && buffer.limit() > 0) {
-							buffer.put(_readData);// È¥µô¸½¼ÓµÄÊý¾Ý³¤¶È
+							buffer.put(_readData);// È¥ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½Ý³ï¿½ï¿½ï¿½
 						}
 						flag = true;
 					}
@@ -517,13 +518,13 @@ public class Reader extends PACKAGE {
 		if (!deviceConnected) {
 			return false;
 		}
-		// Ò»´ÎÑ°¿¨Ê±£¬¶ÁÈ¡ÌìÏß¹¤×÷×´Ì¬, ÓÃÓÚ¿ØÖÆÏß³ÌºÎÊ±½áÊø
+		// Ò»ï¿½ï¿½Ñ°ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ß¹ï¿½ï¿½ï¿½×´Ì¬, ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ß³Ìºï¿½Ê±ï¿½ï¿½ï¿½ï¿½
 		ByteBuffer buffer = ByteBuffer.allocate(100);
 		boolean getAnt = getAnt(reader, buffer);
 		if (!getAnt) {
 			return false;
 		}
-		// ¹¤×÷ÌìÏß×´Ì¬ÉèÎª0,ÐèµÈ´ý½áÊø°ü´ú±íÍê³ÉÑ°¿¨
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½Îª0,ï¿½ï¿½È´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ°ï¿½ï¿½
 		threadStart = false;
 		headCount = 0;
 		dataCount = 0;
@@ -544,13 +545,13 @@ public class Reader extends PACKAGE {
 		if (!deviceConnected) {
 			return false;
 		}
-		// Ò»´ÎÑ°¿¨Ê±£¬¶ÁÈ¡ÌìÏß¹¤×÷×´Ì¬, ÓÃÓÚ¿ØÖÆÏß³ÌºÎÊ±½áÊø
+		// Ò»ï¿½ï¿½Ñ°ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ß¹ï¿½ï¿½ï¿½×´Ì¬, ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ß³Ìºï¿½Ê±ï¿½ï¿½ï¿½ï¿½
 		ByteBuffer buffer = ByteBuffer.allocate(100);
 		boolean getAnt = getAnt(reader, buffer);
 		if (!getAnt) {
 			return false;
 		}
-		// ¹¤×÷ÌìÏß×´Ì¬ÉèÎª0,ÐèµÈ´ý½áÊø°ü´ú±íÍê³ÉÑ°¿¨
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½Îª0,ï¿½ï¿½È´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ°ï¿½ï¿½
 		threadStart = false;
 		headCount = 0;
 		dataCount = 0;
@@ -623,7 +624,7 @@ public class Reader extends PACKAGE {
 		if (!threadStart) {
 			return true;
 		}
-		threadStart = false; // ÉèÖÃÏß³Ì½áÊø±êÖ¾
+		threadStart = false; // ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ì½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾
 		// ByteBuffer buffer = ByteBuffer.allocate(100);
 		if (sendData(reader, CMD.UHF_INV_MULTIPLY_END, null, 0)) {
 			StopReaderCard stopReaderCard = new StopReaderCard(reader,callBackStopReadCard);
@@ -645,7 +646,7 @@ public class Reader extends PACKAGE {
 		if (!threadStart) {
 			return true;
 		}
-		threadStart = false; // ÉèÖÃÏß³Ì½áÊø±êÖ¾
+		threadStart = false; // ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ì½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾
 		// ByteBuffer buffer = ByteBuffer.allocate(100);
 		if (sendData(reader, CMD.UHF_INV_MULTIPLY_END_V2, null, 0)) {
 			StopReaderCard stopReaderCard = new StopReaderCard(reader,callBackStopReadCard);
@@ -669,7 +670,7 @@ public class Reader extends PACKAGE {
 			if (isSerialPortConnect) {
 				buffer = comReceiveData(reader);
 			} else {
-				buffer = socketRecvData(reader);// ÉèÖÃ1Ãë³¬Ê±
+				buffer = socketRecvData(reader);// ï¿½ï¿½ï¿½ï¿½1ï¿½ë³¬Ê±
 			}
 		}
 		return buffer;
@@ -709,17 +710,17 @@ public class Reader extends PACKAGE {
 		boolean[] type = BitOperation.byteToBooleans(dataStorage[0]);//temporary storage
 		
 		int index = 0;
-		if (type[0]) { // ÓÐÌìÏß
+		if (type[0]) { // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			System.arraycopy(readData,EPCLength + 2 + index , dataStorage, 0, 1);
 			ant = String.valueOf(DataConvert.byteToInt(dataStorage[0]));
 			index++;
 		}
-		if (type[1]) {// ÓÐrssi
+		if (type[1]) {// ï¿½ï¿½rssi
 			System.arraycopy(readData, EPCLength + 2 + index, dataStorage, 1, 1);
 			rssi = String.valueOf(DataConvert.byteToInt(dataStorage[1]));
 			index++;
 		}
-		if (type[2]) {// ÓÐÉè±¸ºÅ  
+		if (type[2]) {// ï¿½ï¿½ï¿½è±¸ï¿½ï¿½  
 			System.arraycopy(readData, EPCLength + 2 + index, dataStorage, 2, 2);
 			int devNo = 0;
 			devNo|=DataConvert.byteToInt(dataStorage[2])<<8;
@@ -727,17 +728,17 @@ public class Reader extends PACKAGE {
 			deviceNo = String.valueOf(devNo);
 			index+=2;
 		}
-		if (type[3]) {// ÓÐ´¥·¢ÌìÏß
+		if (type[3]) {// ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			System.arraycopy(readData, EPCLength + 2 + index, dataStorage, 4, 1);
 			direction = String.valueOf(DataConvert.byteToInt(dataStorage[4]));
-			index++; //Ô¤Áô
+			index++; //Ô¤ï¿½ï¿½
 		}
 		byte[] epcData = new byte[EPCLength];
 		System.arraycopy(readData, 2, epcData, 0, EPCLength);
 		String EPC = DataConvert.bytesToHexString(epcData);
 		
 		filterData.put("EPC", EPC); //EPC
-		filterData.put("ANT", ant); // ÌìÏß
+		filterData.put("ANT", ant); // ï¿½ï¿½ï¿½ï¿½
 		filterData.put("RSSI", rssi);// RSSI
 		filterData.put("DeviceNo", deviceNo);// deviceNo
 		filterData.put("Direction", direction);// direction
@@ -757,26 +758,26 @@ public class Reader extends PACKAGE {
 				int length = DataConvert.byteToInt(receiveLength.array()[0]);
 				byte[] readData = Arrays.copyOf(receiveBuf.array(), length);
 				switch (cmd) {
-				case 0x25:// Ñ°¿¨Ò»´Î
+				case 0x25:// Ñ°ï¿½ï¿½Ò»ï¿½ï¿½
 					if (length == 16) {
 						map = filterEpcAndAnt(readData);
 						//callBack.readData(map.get("EPC"), map.get("ANT"));
 					}
-					// ¼ì²éÊÇ²»ÊÇ½áÊø°ü
-					if (2 == length) {// Ä³ÌìÏßÑ°¿¨½áÊøÊý¾Ý°ü
+					// ï¿½ï¿½ï¿½ï¿½Ç²ï¿½ï¿½Ç½ï¿½ï¿½ï¿½ï¿½ï¿½
+					if (2 == length) {// Ä³ï¿½ï¿½ï¿½ï¿½Ñ°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý°ï¿½
 						String data = DataConvert.bytesToHexString(readData[1]);
 						if (data.equals("F0")) {
-							threadStart = false; // ÉèÖÃÏß³Ì½áÊø±êÖ¾
+							threadStart = false; // ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ì½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾
 						}
 					}
 					break;
-				case 0x2A:// Á¬ÐøÑ°¿¨Ä£Ê½£¬·µ»ØÊý¾Ý
+				case 0x2A:// ï¿½ï¿½ï¿½ï¿½Ñ°ï¿½ï¿½Ä£Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					if (length == 16) {
 						map = filterEpcAndAnt(readData);
 						//callBack.readData(map.get("EPC"), map.get("ANT"));
 					}
 					break;
-				case 0x2B:// Í£Ö¹Á¬ÐøÑ°¿¨Ä£Ê½
+				case 0x2B:// Í£Ö¹ï¿½ï¿½ï¿½ï¿½Ñ°ï¿½ï¿½Ä£Ê½
 					if (readData[0] != ERROR.HOST_ERROR) {
 						stopRead = true;
 					}
@@ -800,9 +801,9 @@ public class Reader extends PACKAGE {
 				int length = DataConvert.byteToInt(receiveLength.array()[0]);
 				byte[] readData = Arrays.copyOf(receiveBuf.array(), length);
 				// PRINT ACA
-				//2018-11-30ÐÂÔöµÄ Ð­Òé
+				//2018-11-30ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ð­ï¿½ï¿½
 				switch (cmd) {
-				case (byte) 0xE5:// Ñ°¿¨Ò»´Î
+				case (byte) 0xE5:// Ñ°ï¿½ï¿½Ò»ï¿½ï¿½
 					if (length > 10) {
 						// RECUPERA EPC
 						EpcData = filterEpcRssiAndAnt(readData);
@@ -810,17 +811,17 @@ public class Reader extends PACKAGE {
 					}
 					if(seq == 0x02){
 						if(1 == length){
-							threadStart = false; // ÉèÖÃÏß³Ì½áÊø±êÖ¾
+							threadStart = false; // ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ì½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¾
 						}
 					}
 					break;
-				case (byte) 0xEA:// Á¬ÐøÑ°¿¨Ä£Ê½£¬·µ»ØÊý¾Ý
+				case (byte) 0xEA:// ï¿½ï¿½ï¿½ï¿½Ñ°ï¿½ï¿½Ä£Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 					if (length > 10) {
 						EpcData = filterEpcRssiAndAnt(readData);
 						callBack.readData(EpcData.get("EPC"), EpcData.get("RSSI"), EpcData.get("ANT"),EpcData.get("DeviceNo"),EpcData.get("Direction"));
 					}
 					break;
-				case (byte) 0xEB:// Í£Ö¹Á¬ÐøÑ°¿¨Ä£Ê½
+				case (byte) 0xEB:// Í£Ö¹ï¿½ï¿½ï¿½ï¿½Ñ°ï¿½ï¿½Ä£Ê½
 					if (readData[0] != ERROR.HOST_ERROR) {
 						stopRead = true;
 					}
@@ -909,7 +910,7 @@ public class Reader extends PACKAGE {
 				e.printStackTrace();
 			}
 		} while (exit);
-		// ÇåÀíÏß³Ì×ÊÔ´
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ß³ï¿½ï¿½ï¿½Ô´
 		receiveLength = 0;
 		headCount = 0;
 		dataCount = 0;
@@ -947,7 +948,7 @@ public class Reader extends PACKAGE {
 				e.printStackTrace();
 			}
 		} while (exit);
-		// ÇåÀíÏß³Ì×ÊÔ´
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ß³ï¿½ï¿½ï¿½Ô´
 		receiveLength = 0;
 		headCount = 0;
 		dataCount = 0;
@@ -958,7 +959,7 @@ public class Reader extends PACKAGE {
 			return false;
 		}
 		byte buf[] = new byte[256];
-		int bufsize = 3 + length * 2 + 4;// lengthÊÇ×Ö
+		int bufsize = 3 + length * 2 + 4;// lengthï¿½ï¿½ï¿½ï¿½
 		buf[0] = (byte) bank;
 		buf[1] = (byte) begin;
 		buf[2] = (byte) length;
@@ -970,7 +971,7 @@ public class Reader extends PACKAGE {
 			count += 2;
 			inData[i] = (byte) result;
 		}
-		System.arraycopy(inData, 0, buf, 3 + 4, length * 2);// ÒªÐ´ÈëµÄÊý¾Ý
+		System.arraycopy(inData, 0, buf, 3 + 4, length * 2);// ÒªÐ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		ByteBuffer buffer = ByteBuffer.allocate(20);
 		if (sendData(reader, CMD.UHF_WRITE_TAG_DATA, buf, bufsize)) {
 			try {
@@ -1057,7 +1058,7 @@ public class Reader extends PACKAGE {
 	}
 
 	/**
-	 * Î´ÆôÓÃ
+	 * Î´ï¿½ï¿½ï¿½ï¿½
 	 * @param reader
 	 * @param buffer
 	 * @return
@@ -1161,7 +1162,7 @@ public class Reader extends PACKAGE {
 		int bufsize = 2;
 		byte[] buf = new byte[16];
 		buf[0] = (byte) (neighJudgeTime > 0 ? 1 : 0); // timeÎª0,
-														// È¡ÏûÏàÁÚÅÐ¶¨£¬·Ç0£¬ÉèÖÃÏàÁÚÅÐ¶¨
+														// È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½ï¿½0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½
 		buf[1] = neighJudgeTime;
 		ByteBuffer buffer = ByteBuffer.allocate(100);
 		if (sendData(reader, CMD.UHF_SET_TAG_FILTER, buf, bufsize)) {
@@ -1317,23 +1318,23 @@ public class Reader extends PACKAGE {
 		if (length < 1) {
 			return null;
 		}
-		if (bank == 0) {// ±£ÁôÇø
+		if (bank == 0) {// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			if (begin + size > 4) {
 				return null;
 			}
-		} else if (bank == 1) { // EPCÇø
+		} else if (bank == 1) { // EPCï¿½ï¿½
 			if (begin + size > 8) {
 				return null;
 			}
-		} else if (bank == 2) { // TIDÇø
+		} else if (bank == 2) { // TIDï¿½ï¿½
 			if (begin + size > 6) {
 				return null;
 			}
-		} else if (bank == 3) { // ÓÃ»§Çø
+		} else if (bank == 3) { // ï¿½Ã»ï¿½ï¿½ï¿½
 			if (begin + size > 32) {
 				return null;
 			}
-		} else { // ÎÞÐ§µÄbankÖµ
+		} else { // ï¿½ï¿½Ð§ï¿½ï¿½bankÖµ
 			return null;
 		}
 		byte sendBuf[] = new byte[256];
@@ -1348,7 +1349,7 @@ public class Reader extends PACKAGE {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			// ÓÃÀ´½ÓÊÕÊý¾Ý´æ·ÅµÄbuffer
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý´ï¿½Åµï¿½buffer
 			ByteBuffer buffer = ByteBuffer.allocate(20);
 			if (readData(reader, CMD.UHF_READ_TAG_DATA, buffer, length)) {
 				if (data[0] != ERROR.HOST_ERROR) {
@@ -1671,7 +1672,7 @@ public class Reader extends PACKAGE {
 	
 	/*****************************reserved 2018-12-07 start***************************************/
 	/**
-	 * ÉèÖÃDigital Output×´Ì¬
+	 * ï¿½ï¿½ï¿½ï¿½Digital Output×´Ì¬
 	 */
 	boolean setDO(Reader reader, int port, int state) {
 		if (null == reader) {
@@ -1803,7 +1804,7 @@ public class Reader extends PACKAGE {
 			return false;
 		}
 		if (sendData(reader, CMD.UHF_GET_TAG_BUFFER, null, 0)) {
-			// ÔÝÎ´×ö
+			// ï¿½ï¿½Î´ï¿½ï¿½
 			return true;
 		}
 		return false;

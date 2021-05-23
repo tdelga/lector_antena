@@ -12,7 +12,6 @@ import com.jietong.rfid.uhf.service.impl.ReaderServiceImpl;
 
 public class MainProgram{
 	
-	static String id_cabina;
 	static String host;
 	static LogFile log_file;
 	static Mail mail;
@@ -20,26 +19,17 @@ public class MainProgram{
 	static String last_epc_processed = "";
 	
 	// MAIN PROGRAM
-	public static void main(String [] args) throws IOException, Throwable{
-
-		// SERVER CONFIG
-		api_server = ReadConfigMain.getIpDestino();
-		ApiServer.login();
+	public static void main(String [] args) throws IOException, Throwable{		
 		
-		/*/  MAIN CONFIG
-		host = ReadConfigMain.getHost();
-		id_cabina = ReadConfigMain.getIdCabina();
+		// SERVER CONFIG
+		api_server = ReadConfigMain.getServer();
 		
 		// LOG FILE CONFIG
 		log_file = ReadConfigMain.getLogFile();
 		LogFile.verificarTamanio();
 		
-		
-		// SEND MAIL
-		mail = ReadConfigMain.getMail();
-		mail.enviarLog();
-		
 		// SERVICIO LECTOR EN ATENA
+		host = ReadConfigMain.getHost();
 		ReaderService readerService = new ReaderServiceImpl();
 		Reader reader = new Reader();		
 		
@@ -47,7 +37,7 @@ public class MainProgram{
 		reader = readerService.connect(host, 0);
 		readerService.beginInvV2(reader, new CallBackData());
 
-	    //readerService.disconnect(reader);*/
+	    //readerService.disconnect(reader);
 	}
 	
 	// CALLBACK ASIGNADO A LECTURA DE ANTENA
@@ -62,14 +52,19 @@ public class MainProgram{
 				last_epc_processed = data;
 				
 				// TIME
-				String right_now_time = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
+				String right_now_time = new SimpleDateFormat("dd/MM/yyyy, HH:mm:ss").format(new Date());
 				
-				// SERVER SEND
-				ApiServer.enviarLectura(data, right_now_time);
-
+				//SERVER SEND
+				try {
+					ApiServer.enviarLectura(last_epc_processed, right_now_time);
+				} catch (Exception e) {
+					System.out.println("Error al enviar la lectura al servidor");
+					e.printStackTrace();
+				}
+				
 				//GUARDA EN LOG
 				try {
-					LogFile.guardarLectura(data, right_now_time);
+					LogFile.guardarLectura(last_epc_processed, right_now_time);
 				} catch (IOException e) {
 					System.out.println("Error al guardar la lectura en el log local");
 					e.printStackTrace();

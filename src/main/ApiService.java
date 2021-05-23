@@ -2,7 +2,6 @@ package main;
 
 import com.google.gson.JsonObject;
 
-
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Header;
@@ -16,7 +15,7 @@ public interface ApiService {
 
     
     @POST ("/lecturas/new")
-    Call<String> sendLectura(@Header("Authorization") String token, @Body JsonObject lectura);
+    Call<LecturaResponse> sendLectura(@Header("Authorization") String token, @Body JsonObject lectura);
 
 
 }

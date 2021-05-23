@@ -18,9 +18,9 @@ public class SocketDaoImpl implements SocketDao {
 		byte[] bytes = null;
 		try {
 			in = socket.getInputStream();
-			int bufflenth = in.available(); // »ñÈ¡bufferÀïµÄÊý¾Ý³¤¶È
+			int bufflenth = in.available(); // ï¿½ï¿½È¡bufferï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý³ï¿½ï¿½ï¿½
 			while (bufflenth != 0) {
-				bytes = new byte[bufflenth]; // ³õÊ¼»¯byteÊý×éÎªbufferÖÐÊý¾ÝµÄ³¤¶È
+				bytes = new byte[bufflenth]; // ï¿½ï¿½Ê¼ï¿½ï¿½byteï¿½ï¿½ï¿½ï¿½Îªbufferï¿½ï¿½ï¿½ï¿½ï¿½ÝµÄ³ï¿½ï¿½ï¿½
 				in.read(bytes);
 				bufflenth = in.available();
 			}
@@ -69,18 +69,16 @@ public class SocketDaoImpl implements SocketDao {
 
 	@Override
 	public Socket open(String host, int port) {
-		// Í¨¹ý¶Ë¿ÚÃûÊ¶±ð¶Ë¿Ú
+
 		Socket socket = new Socket();
 		try {
 			InetAddress addr = InetAddress.getByName(host);
 			try {
 				socket.connect(new InetSocketAddress(addr, port), 300);
-				// socket.setSendBufferSize(100);
-				System.out.println("Open " + host + " sucessfully !");
+				System.out.println("Conexion exitosa!");
 				return socket;
 			} catch (IOException e) {
-				System.out.println("Á¬½ÓÊ§°Ü");
-				// e.printStackTrace();
+				e.printStackTrace();
 			}
 		} catch (UnknownHostException e1) {
 			e1.printStackTrace();

@@ -27,6 +27,10 @@ public class Mail {
 		mail_destino = destino;
 		log_path = log;
 		id_Cabina = cabina;
+		
+		// SEND MAIL
+		//mail = ReadConfigMain.getMail();
+		//mail.enviarLog();
 	}
 	
 	public void enviarLog() {
