@@ -30,6 +30,8 @@ Configuracion y Ejecucion
   
 4- systemctl enable reader , esto habilita el servicio para el booteo
 
-PARA TESTEO systemctl star reader
+PARA TESTEO systemctl start reader
+
+PARA DEBUG systemctl status reader
   
 
